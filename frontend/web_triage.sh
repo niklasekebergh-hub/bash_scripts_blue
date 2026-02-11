@@ -185,8 +185,8 @@ for r in "${ROOTS[@]}"; do
   echo "top entries:"
   ls -la "$r" 2>/dev/null | head -n 50 || true
 
-  run "Interesting web/app files (newest first; top ${MAX_INTERESTING})" bash -lc \
-    "interesting_find \"$r\" | sort -r | head -n ${MAX_INTERESTING}"
+  h2 "Interesting web/app files (newest first; top ${MAX_INTERESTING})"
+  interesting_find "$r" | sort -r | head -n "$MAX_INTERESTING" || true
 
   run "Recent changes (mtime < 24h; newest first; top ${MAX_RECENT})" bash -lc \
     "find \"$r\" -xdev -type f -mtime -1 -printf '%TY-%Tm-%Td %TH:%TM %u:%g %p\n' 2>/dev/null | sort -r | head -n ${MAX_RECENT}"
